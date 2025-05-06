@@ -1,0 +1,189 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{amsmath}
+\usepackage{hyperref}
+
+\title{Equation of motion a of one-dimensional string (modeled as a mass-spring system)}
+\author{Toru Kikuchi}
+\date{May 2025}
+
+\begin{document}
+
+\maketitle
+
+\section{Purpose of this note}
+
+We are going to derive the equation of motion of a one-dimensional string (such as a guitar string) stretched by tension $F$. 
+
+Consider a string stretched along the $x$-axis.
+Let $u(x)$ denote the longitudinal displacement of the string at $x$, and $v(x)$ denote the transverse displacement.   
+
+The purpose of this note is to derive the following equations of motion:
+\begin{align}
+\rho_{\rm V} \frac{d^2u}{dt^2} = E\frac{d^2u}{dx^2}, \quad \rho \frac{d^2v}{dt^2} = F\frac{d^2v}{dx^2},
+\end{align}
+where $\rho_{\rm V}$ is the three-dimensional mass density (mass per volume), $\rho$ is the one-dimensional mass density (mass per length), and $E$ is the Young's modulus of the string.  (When we denote the cross-sectional area of the string by $S$, then $\rho_{\rm V}$ and $\rho$ are related via $\rho=S\rho_{\rm V}$.) 
+
+
+\section{Modeling}
+We model the string as a system in which infinitely many point masses are connected by springs, as in Fig.\ref{fig:mass-spring system}. 
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.5\linewidth]{mass_spring_system.pdf}
+    \caption{mass-spring system}
+    \label{fig:mass-spring system}
+\end{figure}
+
+\subsection{notation}
+In the equilibrium state, the system lies along the $x$-direction without any motion, only stretched by an external force $F$ applied to the system.  
+We take the $y$-axis as the transverse direction.  
+
+The spring constant is denoted by $k$ and the natural length of the spring $l_0$. The spring is stretched by tension $F$.  We denote the stretched length by $l$, that is, $l=l_0 + F/k$.  The mass of each point mass is $m$.
+
+In the equilibrium state, the $n$-th point mass is located at $(x,y)=(ln, 0)$.  We denote displacements of the $n$-th point mass from its equilibrium position by $u_n$ and $v_n$, that is, when deformed, the point mass is located at $(x,y)=(ln+u_n, v_n)$.
+
+\subsection{equation of motion}
+We focus on the equation of motion of the $n$-th point mass. As in Fig.\ref{fig:deformed mass-spring system}, let us denote the length of the spring between $(n-1)$-th and $n$-th point masses by $d_L$, and the length between $n$-th and $(n+1)$-th by $d_R$.  
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.5\linewidth]{mass_spring_system_deformed.pdf}
+    \caption{deformed mass-spring system}
+    \label{fig:deformed mass-spring system}
+\end{figure}
+
+These lengths are given by
+\begin{align}
+d_L &= \sqrt{(l+u_n-u_{n-1})^2+(v_n-v_{n-1})^2}, \\
+d_R &= \sqrt{(l+u_{n+1}-u_n)^2+(v_{n+1}-v_n)^2}.
+\end{align}
+The equation of motion of the $n$-th mass is given by
+\begin{align}
+m\frac{d^2u_n}{dt^2} &= -k(d_L-l_0)\frac{l+u_n-u_{n-1}}{d_L} + k(d_R-l_0)\frac{l+u_{n+1}-u_n}{d_R} \label{original un equation} \\
+m\frac{d^2v_n}{dt^2} &= -k(d_L-l_0)\frac{v_n-v_{n-1}}{d_L} + k(d_R-l_0)\frac{v_{n+1}-v_n}{d_R} \label{original vn equation}
+\end{align}
+
+In the following, we take the continuum limit and perform a  spatial derivative expansion to simplify these equations of motion. We then rewrite the coefficients in terms of more model-independent macroscopic quantities.  
+
+\subsubsection{long wavelength limit (derivative expansion)}
+Since we are using the mass-spring system as a model for a string, the spring length $l$ is very small (on the order of microscopic scale). So we can treat $u_n$ and $v_n$ as continuous functions $u(x)$ and $v(x)$, where $u_n=u(ln)$ and $v_n=v(ln)$.  
+
+Using the Taylor expansion, 
+\begin{align}
+    u_n - u_{n-1} &= u(ln) - u(l(n-1)) \nonumber \\
+    &= lu' - \frac{l^2}{2}u'' + \cdots,
+\end{align}
+where $u'\equiv \partial u/\partial x |_{x=ln}$ and so on (similarly for $v_n$), we expand the right-hand sides of Equations \eqref{original un equation} and \eqref{original vn equation} in terms of the spatial derivative $\partial/\partial x$, and keep only the lowest order of the expansion.  This approximation will be valid as long as the wavelengths of $u$ and $v$ are long enough (we do not delve into a question of ``long compared to what?'' in this note).
+
+\subsubsection{qualitative discussion of the derivative expansion}
+When we peform the derivative expansion to the second order, we will get terms proportional to
+\begin{itemize}
+\item the zeroth order: constant, 
+\item the first order: $u', v'$,
+\item the second oder: $(u')^2, (v')^2, u'v', u'', v''$.  
+\end{itemize}
+But as we will see, only the terms proportional to $u''$ and $v''$ survive.  
+
+Physically, this can be understood because $u''=0$ and $v''=0$ mean that the string is straight; it is in its equilibrium state and no forces will be generated.  
+
+Formally, this can be understood as follows.  For example, look at the $u$-dependence of the right-hand side of Eq.\eqref{original un equation}.  The first term depends on $u$ through $u_n - u_{n-1}$ and the second $u_{n+1} - u_n$.  But since  
+\begin{align}
+    u_n - u_{n-1} &= lu' - \frac{l^2}{2}u'' + \cdots, \\
+    u_{n+1} - u_n &= lu' + \frac{l^2}{2}u'' + \cdots,
+\end{align}
+when we set $u''=0$, the $u$-dependence of the first term and the second term of the right-hand side of Eq.\eqref{original un equation} are completely the same. We can say the same thing for the $v$-dependence.  And these terms add up with opposite sign, which means that the right-hand side of eq.\eqref{original un equation} vanishes when we set $u''=0$ and $v''=0$.  Therefore, the terms other than the terms proportional to $u''$ and $v''$ vanish to the second-order derivative.  We can say the same thing for Eq.\eqref{original vn equation}.  
+
+\subsubsection{calculation}
+Now we perform derivative expansion, to the second order, for the right-hand sides of Eq.\eqref{original un equation} and Eq.\eqref{original vn equation}.  As we have seen in the last subsection, we have only to look at terms proportional to $u''$ and $v''$.  Moreover, the first and the second terms yield the same contribution.   
+
+%Let us calculate the factors appearing on the right-hand sides of Eqs.\eqref{original un equation} and \eqref{original vn equation} one by one.
+Consider the first term in right-hand side of Eq.\eqref{original un equation}.  Using
+\begin{align}
+d_L &= l\left[ 1+u'+\frac{1}{2}(v')^2-\frac{l}{2}u'' \right] +\mathcal O(\partial^3), \nonumber \\
+d_L - l_0 &= l\left[ \frac{F}{kl}+u'+\frac{1}{2}(v')^2-\frac{l}{2}u'' \right] +\mathcal O(\partial^3), \nonumber \\
+\frac{1}{d_L} &= \frac{1}{l}\left[1-u'-\frac{1}{2}(v')^2+\frac{l}{2}u''+(u')^2  \right] +\mathcal O(\partial^3),
+\end{align}
+we get,
+\begin{align}
+-k(d_L-l_0)\frac{l+u_n-u_{n-1}}{d_L} =& -kl\left[ \frac{F}{kl}+\cdots-\frac{l}{2}u'' \right]
+\left[1+\cdots+\frac{l}{2}u'' \right]
+\left[1+\cdots-\frac{l}{2}u''\right]
+ \nonumber \\
+=& -kl \left(-1+\frac{F}{kl}-\frac{F}{kl}\right)\frac{l}{2}u'' + \cdots \nonumber \\
+=& \frac{kl^2}{2}u'' + \cdots.
+\end{align}
+Here, by "$\cdots$", we abbreviated terms that do not contribute to the final result (i.e., terms not proportional either to $u''$ or $v''$).
+Similarly, for the right-hand side in Eq.\eqref{original vn equation},
+\begin{align}
+-k(d_L-l_0)\frac{v_n-v_{n-1}}{d_L} =& -kl\left[ \frac{F}{kl}+\cdots-\frac{l}{2}u'' \right]
+\left[1+\cdots+\frac{l}{2}u'' \right]
+\left[v'-\frac{l}{2}v''\right]\nonumber \\
+=& \frac{Fl}{2}v'' + \cdots
+\end{align}
+(terms including $u''$ do not remain because they end up to be the higher order terms such as $u''v'$).
+
+Thus, we have expanded the right-hand sides of Eqs.\eqref{original un equation} and \eqref{original vn equation} in terms of the spatial derivative of $u$ and $v$, which results in 
+\begin{align}
+    m\frac{d^2u}{dt^2} = kl^2 u'', \quad m\frac{d^2v}{dt^2} = Fl v''. \label{microscopic equation of motion}
+\end{align}
+{\it Remark:} When $F=0$, the right-hand side of the equation of motion for $v$ in Eq.\eqref{microscopic equation of motion} vanishes.  But this does not mean that restoring force for $v$ entirely vanishes.  When $F=0$ or $F$ is very small, then the derivative terms more than second order contribute as the leading order term.   
+
+
+\subsubsection{Equation of motion in terms of macroscopic coefficients}
+The equation of motion \eqref{microscopic equation of motion} is written in terms of the coefficients $m,k,l$, which are specific to the mass-spring model we use.  
+Let us rewrite these coefficients by more macroscopic ones, which do not depend on specific models and can be compared to experiments more directly.    
+
+In the following, we assume that we are dealing with a very stiff string.  This means that $k$ is large, so $l\sim l_0$, that is, the length of the spring $l$ under the tension $F$ can be identified with the original length $l_0$. 
+
+
+Young's modulus $E$ is defined by the relation (force per area)=$E$(length change)/(original length). So in our case, the force needed to stretch $l$ to $l+dl$ is (force)=$SEdl/l$, where $S$ is the cross-sectional area of the string (again, note that we assume that the string is so stiff that its cross-sectional area does not change due to the motion of the string).  On the other hand, from the definition of the spring constant, this can be also written as (force)=$kdl$.  Therefore, $kl=SE$.  Thus, using the one-dimensional mass density $\rho\equiv m/l$, we can rewrite the equations of motion into  
+\begin{align}
+    \rho\frac{d^2u}{dt^2} = SE u'', \quad \rho\frac{d^2v}{dt^2} = F v''.  \label{macroscopic equation of motion}
+\end{align}
+It is satisfactory that the equations of motion are written only by macroscopic quantities of the string and do not depend on the parameters of our specific mass-spring model. 
+
+It is more essential to rewrite the equation of motion of $u$ in terms of $\rho_{\rm V} = \rho/S$, which is the mass density per volume.  Then the factor $S$ cancels out and the equation of motion becomes 
+$$
+\rho_{\rm V}\frac{d^2u}{dt^2}=Eu''.
+$$  
+Therefore, we see that the equations of motion of $u$ and $v$ have different characteristics: in intuitive terms, the equation of motion of $u$ is ``intrinsic'', while that of $v$ is``extrinsic''.  To be a little more accurate,
+the equation of motion of the longitudinal motion $u$ is described only by quantities $\rho_{\rm V}, E$, which are intrinsic to materials and do not depend on the shape (such as cross section) of string or whatever external. On the other hand, the equation of motion of the transverse motion $v$ is described by $\rho$, which is an integration quantity over the cross section, and $F$, which is an external force.  
+
+\subsubsection{typical values}
+Let us take a piano wire as an example, and look at some typical values\footnote{
+The value of $E$ is taken from a \href{https://www.kagaspring.com/keyword/item_806.html}{website}, and the other values are taken from a textbook by Toshihiko Tsuneto (in Japanese).
+}.
+
+For the coefficients $S, E, F$, typically the radius of a wire is 0.5mm, so $S=8\times 10^{-7}{\rm m}^2$, and  
+$E=200{\rm GPa}=2\times 10^{11}{\rm N/m}^2$, and $F=80{\rm kgw}=8\times 10^2{\rm N}$.  Therefore, since $SE\sim 10^5{\rm N}$, the longitudinal mode $u$ propagates about 10 times faster than the transverse mode $v$.  
+
+Next, let us look at a typical frequency of a transverse mode $v$.  Denote an entire length of a string by $L$.  Then, the lowest wave number of standing waves is $\pi/L$, and its frequency $f$ is 
+$$
+f = \frac{\omega}{2\pi} = \frac{1}{2\pi}\sqrt{\frac{F}{\rho}}\frac{\pi}{L}
+$$
+Typically $L=0.69{\rm m}$, and $\rho_{\rm V}=7.9{\rm g/cm}^3=7.9\times 10^3{\rm kg/m}^3$ (leading to $\rho=S\rho_{\rm V}=6.2\times 10^{-3}{\rm kg/m}$) for the note ${\rm C}_3$.   This leads to $f=2.6\times 10^2{\rm Hz}$, which agrees with an experimental value (261.625Hz). It is said that humans can hear from 20Hz to 20kHz.  
+
+\section{Summary}
+$\bullet$ Objective: derivation of equations of motion for a string (such as a guitar string)
+
+\noindent$\bullet$ Model: mass-spring system
+
+\noindent $\bullet$ Approximation: continuum limit and derivative expansion
+
+\noindent $\bullet$ Major Assumption: the wavelength of string deformation is very large, and the string is very stiff (the latter is used to rewrite Eq.\eqref{microscopic equation of motion} to \eqref{macroscopic equation of motion})
+
+\noindent $\bullet$ Result: The equations of motions of longitudinal displacement $u$ and transverse one $v$ are described as 
+\begin{align}
+    \rho_{\rm V}\frac{d^2u}{dt^2} = E u'', \quad \rho\frac{d^2v}{dt^2} = F v'',
+\end{align}
+where $\rho_{\rm V}$ is the three-dimensional mass density of the string, $\rho$ is the one-dimensional mass density of the string,  $E$ is the Young's modulus of the string, and $F$ is the tension applied to the string. 
+
+
+\section{To Do}
+ $\bullet$ Intuitive understanding of the result. 
+
+\noindent $\bullet$ Symmetry discussion: Can we derive the fact that $u$ and $v$ get decoupled in the long wavelength limit from some symmetry discussion (such as spatial inversion symmetry)?
+
+
+\end{document}
